@@ -80,14 +80,14 @@ describe("path confinement (audit F1–F3)", () => {
       return;
     }
 
-    await expect(
-      executeToolInWorktree(
-        worktree,
-        "write_file",
-        { path: "link/pwned.txt", content: "audit-escape" },
-        session_root
-      )
-    ).rejects.toThrow(/outside|symlink|escape|refus/i);
+    const result = await executeToolInWorktree(
+      worktree,
+      "write_file",
+      { path: "link/pwned.txt", content: "audit-escape" },
+      session_root
+    );
+    expect(result.exit_code).toBe(1);
+    expect(result.stderr).toMatch(/outside|symlink|escape|refus/i);
 
     expect(fs.existsSync(path.join(outsideDir, "pwned.txt"))).toBe(false);
   });
