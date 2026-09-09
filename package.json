@@ -1,0 +1,25 @@
+{
+  "name": "settlement-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Settlement-layer harness for OpenCode Desktop",
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:ledger": "jest settlement-ledger --runInBand",
+    "test:harness": "jest opencode-harness --runInBand",
+    "test:e2e": "jest e2e --runInBand",
+    "test:unit": "jest --runInBand --testPathIgnorePatterns e2e",
+    "build": "tsc --noEmit",
+    "check:opencode": "node check-opencode.js",
+    "mock:phased": "node mock-opencode.js",
+    "adapter": "node opencode-adapter.js",
+    "test:live": "LIVE_SMOKE=1 jest live-smoke --runInBand"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  }
+}
